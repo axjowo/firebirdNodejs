@@ -1,0 +1,20 @@
+version: '3.3'
+services:
+  firebird:
+    image: jacobalberty/firebird:v3.0.8
+    container_name: firebird
+    volumes:
+      - ./fdb/:/firebird/data
+    ports:
+      - 3050:3050
+    environment:
+      ISC_PASSWORD: masterkey
+      FIREBIRD_DATABASE: test
+      EnableLegacyClientAuth: "true"
+  nodejs:
+    build:
+      context: nodejs/
+    volumes:
+      - ./nodejs:/usr/src/app
+volumes:
+  data:
